@@ -29,7 +29,7 @@ class StatsController extends Controller
 
     public function getDashboardDatas()
     {
-        return $this->render('dashboard.html.twig', [
+        return $this->render('stats/dashboard.html.twig', [
             'controller_name' => 'DashboardController',
 
         ]);
@@ -42,7 +42,7 @@ class StatsController extends Controller
 
     public function getPlanningDatas()
     {
-        return $this->render('planning.html.twig', [
+        return $this->render('stats/planning.html.twig', [
             'controller_name' => 'PlanningController',
 
         ]);
@@ -55,7 +55,7 @@ class StatsController extends Controller
 
     public function getPromotionsDatas()
     {
-        return $this->render('promotions.html.twig', [
+        return $this->render('stats/promotions.html.twig', [
             'controller_name' => 'PromotionsController',
 
         ]);
@@ -63,12 +63,12 @@ class StatsController extends Controller
     }
 
     /**
-     * @Route("/statistiques/MicroWave", name="MicroWave")
+     * @Route("/statistiques/microWave", name="MicroWave")
      */
 
     public function getMicroWaveDatas()
     {
-        return $this->render('microWave.html.twig', [
+        return $this->render('stats/microWave.html.twig', [
             'controller_name' => 'MicroWaveController',
 
         ]);

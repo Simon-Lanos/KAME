@@ -1,5 +1,10 @@
 <?php
 
+/*****************************
+ * Fabrice & Pierre, bisous ! *
+ *****************************/
+
+
 namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,7 +24,7 @@ class StatsController extends Controller
     }
 
     /**
-     * @Route("/dashboard", name="dashboard")
+     * @Route("/statistiques/dashboard", name="dashboard")
      */
 
     public function getDashboardDatas()
@@ -32,7 +37,7 @@ class StatsController extends Controller
     }
 
     /**
-     * @Route("/planning", name="planning")
+     * @Route("/statistiques/planning", name="planning")
      */
 
     public function getPlanningDatas()
@@ -43,5 +48,33 @@ class StatsController extends Controller
         ]);
 
     }
+
+    /**
+     * @Route("/statistiques/promotions", name="promotions")
+     */
+
+    public function getPromotionsDatas()
+    {
+        return $this->render('promotions.html.twig', [
+            'controller_name' => 'PromotionsController',
+
+        ]);
+
+    }
+
+    /**
+     * @Route("/statistiques/MicroWave", name="MicroWave")
+     */
+
+    public function getMicroWaveDatas()
+    {
+        return $this->render('microWave.html.twig', [
+            'controller_name' => 'MicroWaveController',
+
+        ]);
+
+    }
+
+
 
 }

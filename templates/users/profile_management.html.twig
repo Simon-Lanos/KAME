@@ -16,5 +16,11 @@
             <li>Your controller at <code>src/Controller/UsersController.php</code></li>
             <li>Your template at <code>templates/users/index.html.twig</code></li>
         </ul>
+
+        {# templates/default/new.html.twig #}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+
     </div>
 {% endblock %}

@@ -13,7 +13,7 @@ class SupportController extends Controller
     public function SubmitTicket()
     {
         return $this->render('support/index.html.twig', [
-            'controller_name' => 'Creer le Ticket tmtc',
+            'controller_name' => 'Creer le Ticket',
         ]);
     }
     /**
@@ -26,7 +26,7 @@ class SupportController extends Controller
         ]);
     }
     /**
-     * @Route("/support/close", name="supportSubmit")
+     * @Route("/support/close", name="supportClose")
      */
     public function CloseTicket()
     {

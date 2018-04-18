@@ -48,8 +48,25 @@ class UsersController extends Controller
     /**
      * @Route("/users/schedule", name="schedule")
      */
-    public function getSchedule()
+    public function getSchedule($idUser)
     {
+        $user = $this->getDoctrine()
+            ->getRepository(Users::class)
+            ->find($idUser);
+
+
+        if (!$user) {
+            throw $this->createNotFoundException(
+                'No user found for id '.$idUser
+            );
+        }
+
+        //return new Response('Check out this great user: '.$user->getUserFirstName());
+
+        // or render a template
+        // in the template, print things with {{ user.name }}
+
+
         return new Response(
             '<html><body>test d\'affichage 2 le retour</body></html>'
         );

@@ -26,24 +26,9 @@ class DefaultController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form-> isSubmitted() && $form() -> isValid())
-            {
-            $data = $form->getData()
-            $user = $this->getDoctrine()
 
-                ->getRepository(userClass)
-                ->findOneBy(
-                    ['userMail' => $data['userMail']];)
-
-                if ($data['userPassword' == $user-> ['userPassword']])
-                  {
-                  $session -> set('userClass',$user);
-                  return $this-> redirectToRoute();
-                  }
-            }
-
-        return $this->render('default/index.html.twig', [
-            'controller_name' => 'DefaultController',
-        ]);
+      return $this->render('default/index.html.twig', array(
+          'form' => $form->createView()
+      ));
     }
 }

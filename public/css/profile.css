@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+.menuProfile
+{
+    display: none;
+    transition: 5s;
+}
+.profileContainer
+{
+    width: 33%;
+    height: 100vh;
+    background-color: rgba(74, 190, 157, 0.5);
+    z-index: 2;
+    position: fixed;
+    right: 0;
+    top:0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+}
+.profilePicture
+{
+    border-radius: 50%;
+    border: 5px double white;
+    width: 50%;
+    height: auto;
+    margin-top: 20%;
+    opacity: 3;
+
+}
+.marginLeft2
+{
+    margin-left: 2%;
+}
+
+.demiCercle{
+    height: 100px;
+    width: 50px;
+    background: rgba(74, 190, 157, 0.5);
+    border-top-left-radius: 200px;
+    border-bottom-left-radius: 200px;
+    position: fixed;
+    right: 33%;
+    top: 5%;
+    text-align: center;
+    cursor: pointer;
+}
+.croix1
+{
+    content:"";
+    background: white;
+    width: 70%;
+    height: 7%;
+    z-index: 3;
+    border-radius: 15px;
+    transform: rotate(45deg);
+    position: relative;
+    top: 49%;
+    left: 22%;
+}
+.croix2
+{
+    content:"";
+    background: white;
+    width: 70%;
+    height: 7%;
+    z-index: 3;
+    border-radius: 15px;
+    transform: rotate(-45deg);
+    position: relative;
+    top: 42%;
+    left: 22%;
+}
+.hidden
+{
+    display: none;
+}
+.visible
+{
+    display: block;
+}
+.buttonMenuProfile
+{
+    height: 100px;
+    width: 100px;
+    content: "";
+    background: rgba(74, 190, 157, 0.5);
+    border-radius: 50%;
+    position: fixed;
+    right: 3%;
+    top: 5%;
+    cursor: pointer;
+    display: inline-block;
+
+}
+.change .bar{
+    transform: rotate(-45deg) ;
+}
+.change .bar{
+    opacity: 0;
+}
+.change .bar{
+    transform: rotate(45deg) ;
+}
+
+.bar1 , .bar2 , .bar3{
+    content:"";
+    background: white;
+    width: 25px;
+    height: 3px;
+    z-index: 3;
+    margin: 6px 0;
+    transition: .5s;
+    border-radius: 15px;
+    position: relative;
+    top: 37%;
+    left: 37%;
+
+}

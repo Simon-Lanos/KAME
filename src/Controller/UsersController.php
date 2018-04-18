@@ -27,4 +27,16 @@ class UsersController extends Controller
             '<html><body>test d\'affichage </body></html>'
         );
     }
+
+
+    /**
+     * @Route("/users/schedule", name="schedule")
+     */
+    public function getSchedule()
+    {
+        return new Response(
+            '<html><body>test d\'affichage 2 le retour</body></html>'
+        );
+    }
 }
+

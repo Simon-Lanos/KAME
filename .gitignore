@@ -20,4 +20,10 @@ yarn-error.log
 
 ###> symfony/web-server-bundle ###
 /.web-server-pid
+<<<<<<< HEAD
 ###< symfony/web-server-bundle ###
+=======
+###< symfony/web-server-bundle ###
+
+.idea
+>>>>>>> 94f9e8071054b0bb07510cd219a10ba6059d6c08

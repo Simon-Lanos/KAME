@@ -26,16 +26,16 @@ class DefaultController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form)-> isSubmitted() && $form() -> isValid()
+        if ($form-> isSubmitted() && $form() -> isValid())
             {
             $data = $form->getData()
             $user = $this->getDoctrine()
 
                 ->getRepository(userClass)
                 ->findOneBy(
-                    ['userMail'] => $data['userMail'];)
+                    ['userMail' => $data['userMail']];)
 
-                if ($data['userPassword'] == $user-> ['userPassword'])
+                if ($data['userPassword' == $user-> ['userPassword']])
                   {
                   $session -> set('userClass',$user);
                   return $this-> redirectToRoute();

@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+.lobster
+{
+    font-family: 'Lobster', cursive;
+}
+.button
+{
+    min-width: 10%;
+    min-height: 5%;
+    background-color: #4abe9d;
+    text-align: center;
+    padding: 1%;
+    border-radius: 4px;
+    border: 1px solid #4abe9d;
+    color: white;
+}
+a.noUnderLine:link
+{
+    text-decoration:none;
+}
+.buttonBleu
+{
+    min-width: 10%;
+    min-height: 5%;
+    background-color: #4abe9d;
+    text-align: center;
+    padding: 1%;
+    border-radius: 4px;
+    border: 1px solid #4abe9d;
+    color: white;
+}
+.buttonNoir
+{
+    min-width: 10%;
+    min-height: 5%;
+    background-color: #343e47;
+    text-align: center;
+    padding: 1%;
+    border-radius: 4px;
+    border: 1px solid #343e47;
+    color: white;
+}
+.buttonJaune
+{
+    min-width: 10%;
+    min-height: 5%;
+    background-color: #ffed00;
+    text-align: center;
+    padding: 1%;
+    border-radius: 4px;
+    border: 1px solid #ffed00;
+    color: white;
+}
+a.noUnderLine:link
+{
+    text-decoration:none;
+}
+
+.marginTopCinq
+{
+    margin-top: 5%;
+}

@@ -65,23 +65,54 @@ class DefaultController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
+            /** @var User $user */
             $user = $this->getDoctrine()
                 ->getRepository(User::class)
                 ->findOneBy(
                     ['userMail' => $data["userMail"]]
                 );
-            if ($data['userMail'] == $user->getUserMail()){
-                $message = (new \Swift_Message('Hello Email'))
-                    ->setFrom('sendfrom@example.com')
+
+            if (empty($user)) {
+                return $this->render('default/forget.html.twig', array(
+                    'form' => $form->createView(),
+                    'message' => " Email non valide Inscris toi avant boloss!!"
+                ));
+
+            } else {
+                $user = $this->getDoctrine()
+                    ->getRepository(User::class)
+                    ->findOneBy(
+                        ['userMail' => $data["userMail"]]
+                    );
+                $user->setUserToken(hash("sha256", crypt(microtime(), "NWTroll")));
+                //$user->setUserTokenTime(\DateTimeInterface::'Y-m-d H:i:s');
+
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
+
+
+                $message = (new \Swift_Message('Réinitialisation du mot de passe'))
+                    ->setFrom('clement.langendorf@gmail.com')
                     ->setTo($user->getUserMail())
-                    ->setBody('ceci est le body du mail');
+                    ->setBody('
+                        <html>
+                        <head>
+                            <title>Confirmation de votre Inscription</title>
+                        </head>
+                        <body>
+                        <p>Bonjour</p>' . $user->getUserFirstName() . ' ' . strtoupper($user->getUserLastName()) . ' ' . $user->getUserToken() . '
+                        <p>Pour confirmer la réinitialisation de mot de passe, veuiller cliquer sur le boutton si dessous</p>
+                        <a href="http://127.0.0.1:8002/?token=' . $user->getUserToken() . '">
+                            <img src="https://image.noelshack.com/fichiers/2018/15/5/1523612366-buttonvalidation.png" />
+                        </a>
+                        </body>
+                        </html>
+                    ');
                 $mailer->send($message);
                 return $this->redirectToRoute('default');
             }
-           /* else
-                return $this->render('default/forget.html.twig', array(
-                    'form' => $form->createView()));*/
-
         }
 
         return $this->render('default/forget.html.twig', array(

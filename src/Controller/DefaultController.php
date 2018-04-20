@@ -2,9 +2,7 @@
 
 namespace App\Controller;
 
-
 use App\Entity\User;
-
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -28,22 +26,20 @@ class DefaultController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-
+        if ($form->isSubmitted() && $form-> isValid())
+        {
             $data = $form->getData();
-
+            /** @var $user User */
             $user = $this->getDoctrine()
                 ->getRepository(User::class)
-                ->findOneBy(
-                    ['userMail' => $data["userMail"]]
-                );
-            if ($data['userPassword'] == $user->getUserPassword()) {
-                $session->set('user', $user);
-                return $this->redirectToRoute('default');
+                ->findOneBy(['userMail' => $data['userMail']]);
+
+            if ($data['userPassword'] == $user->getUserPassword())
+            {
+                $session -> set('user',$user);
+                return $this-> redirectToRoute('default');
             }
         }
-
-
         return $this->render('default/index.html.twig', array(
             'form' => $form->createView()
         ));

@@ -26,18 +26,16 @@ class DefaultController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form-> isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             /** @var $user User */
             $user = $this->getDoctrine()
                 ->getRepository(User::class)
                 ->findOneBy(['userMail' => $data['userMail']]);
 
-            if ($data['userPassword'] == $user->getUserPassword())
-            {
-                $session -> set('userClass',$user);
-                return $this-> redirectToRoute('default');
+            if ($data['userPassword'] == $user->getUserPassword()) {
+                $session->set('userClass', $user);
+                return $this->redirectToRoute('default');
             }
         }
         return $this->render('default/index.html.twig', array(
@@ -100,7 +98,7 @@ class DefaultController extends Controller
                         <body>
                         <p>Bonjour</p>' . $user->getUserFirstName() . ' ' . strtoupper($user->getUserLastName()) . ' ' . $user->getUserToken() . '
                         <p>Pour confirmer la réinitialisation de mot de passe, veuiller cliquer sur le boutton si dessous</p>
-                        <a href="http://127.0.0.1:8002/?token=' . $user->getUserToken() . '">
+                        <a href="http://127.0.0.1:8002/change/' . $user->getUserToken() . '">
                             <img src="https://image.noelshack.com/fichiers/2018/15/5/1523612366-buttonvalidation.png" />
                         </a>
                         </body>
@@ -113,6 +111,59 @@ class DefaultController extends Controller
 
         return $this->render('default/forget.html.twig', array(
             'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * @Route("/change/{userToken}", name="change")
+     */
+    public function changePassword(Request $request, $userToken)
+    {
+        if (empty($userToken)) {
+            return $this->redirectToRoute('default');
+        }
+
+        /** @var User $user */
+        $user = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findOneBy(
+                ['userToken' => $userToken]
+            );
+
+        if (empty($user)) {
+            return $this->redirectToRoute('default');
+        }
+
+        $form = $this->createFormBuilder()
+            ->add("userPassword", PasswordType::class, array('label' => "Mot de Passe : "))
+            ->add("userPasswordConfirm", PasswordType::class, array('label' => "Confirmer mot de Passe : "))
+            ->add("change", SubmitType::class, array('label' => "Envoyer"))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+
+            if ($data["userPassword"] != $data["userPasswordConfirm"]) {
+                return $this->render('default/change.html.twig', array(
+                    'message' => " Erreur: Vos mots de passe sont différents"
+                ));
+            }
+            $user->setUserPassword($data["userPassword"]);
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            return $this->render('default/index.html.twig', array(
+                'form' => $form->createView()
+            ));
+        }
+        
+        return $this->render('default/change.html.twig', array(
+            'form' => $form->createView(),
+            'message' => "Votre mot de passe a bien été modifié"
         ));
     }
 }

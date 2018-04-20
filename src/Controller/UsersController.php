@@ -27,7 +27,7 @@ class UsersController extends Controller
         ]);
     }
 
-    /**
+    /** @TODO changer la façon dont est charger le controller (passé du GET -> session)
      * Matches /user/profile/*
      * @param $idUser object
      * @Route("/user/profile/{idUser}", name="profile")

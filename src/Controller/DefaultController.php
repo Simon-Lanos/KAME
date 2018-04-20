@@ -27,7 +27,7 @@ class DefaultController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form-> isValid())
+        if ($form->isSubmitted() && $form->isValid())
         {
             $data = $form->getData();
             /** @var $user Users */
@@ -36,10 +36,10 @@ class DefaultController extends Controller
                 ->findOneBy(['userMail' => $data['userMail']]);
 
             if ($data['userPassword'] == $user->getUserPassword())
-              {
-              $session -> set('userClass',$user);
-              return $this-> redirectToRoute('default');
-              }
+            {
+                $session -> set('userClass',$user);
+                return $this-> redirectToRoute('default');
+            }
         }
 
         return $this->render('default/index.html.twig', [

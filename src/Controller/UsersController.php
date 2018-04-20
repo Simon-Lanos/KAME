@@ -5,11 +5,10 @@ namespace App\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use App\Entity\Users;
+use App\Entity\User;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -19,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 class UsersController extends Controller
 {
     /**
-     * @Route("/users", name="users")
+     * @Route("/user", name="user")
      */
     public function index()
     {
@@ -29,14 +28,15 @@ class UsersController extends Controller
     }
 
     /**
-     * Matches /users/profile/*
-     *
-     * @Route("/users/profile/{idUser}", name="profile")
+     * Matches /user/profile/*
+     * @param $idUser object
+     * @Route("/user/profile/{idUser}", name="profile")
+     * @return object view
      */
     public function ProfileManagement($idUser)
     {
         $user = $this->getDoctrine()
-            ->getRepository(Users::class)
+            ->getRepository(User::class)
             ->find($idUser);
 
         if (!$user) {
@@ -52,7 +52,7 @@ class UsersController extends Controller
             ->add('userLastName', TextType::class)
             ->add('userGender', ChoiceType::class)
             ->add('userAdress', TextType::class)
-            ->add('userAvatar', TextType::class)
+            ->add('userAvatar', FileType::class)
             ->add('zipCode', IntegerType::class)
             ->add('userCity', TextType::class)
             ->add('save', SubmitType::class, array('label' => 'Enregistrer mes changements'))
@@ -78,7 +78,7 @@ class UsersController extends Controller
     public function getSchedule($idUser)
     {
         $user = $this->getDoctrine()
-            ->getRepository(Users::class)
+            ->getRepository(User::class)
             ->find($idUser);
 
 

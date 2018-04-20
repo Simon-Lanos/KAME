@@ -6,11 +6,14 @@
 
 {% block body %}
 
-    <h1>Connnexion.</h1>
+    <h1>Mot de passe oublié</h1>
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ form_end(form) }}
-    <a href="./forget">Mot de passe oublié</a>
+    {% if message is defined %}
+    {{ message }}
+    {% endif %}
+
 
 
 {% endblock %}

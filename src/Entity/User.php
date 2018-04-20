@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class Users
+class User
 {
     /**
      * @ORM\Id()
@@ -15,11 +15,6 @@ class Users
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $userId;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -32,52 +27,52 @@ class Users
     private $userPassword;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $userToken;
 
     /**
-     * @ORM\Column(type="datetime", length=255)
+     * @ORM\Column(type="datetime")
      */
     private $userTokenTime;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $userFirstName;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $userLastName;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer")
      */
     private $userGender;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="date")
      */
-    private $userBirthdate;
+    private $userBirthday;
 
     /**
-     * @ORM\Column(type="smallint", nullable=true)
+     * @ORM\Column(type="boolean")
      */
     private $userHasAcceptedTerms;
 
     /**
-     * @ORM\Column(type="smallint", nullable=true)
+     * @ORM\Column(type="boolean")
      */
     private $userHasConfirmedEmail;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
      */
     private $userCreationDate;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $userAdress;
 
@@ -87,40 +82,23 @@ class Users
     private $userAvatar;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer")
      */
     private $zipCode;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $userCity;
 
     /**
-     * @ORM\Column(type="smallint", nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $userSpeciality;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $roleId;
 
     public function getId()
     {
         return $this->id;
-    }
-
-    public function getUserId(): ?int
-    {
-        return $this->userId;
-    }
-
-    public function setUserId(int $userId): self
-    {
-        $this->userId = $userId;
-
-        return $this;
     }
 
     public function getUserMail(): ?string
@@ -152,19 +130,19 @@ class Users
         return $this->userToken;
     }
 
-    public function setUserToken(?string $userToken): self
+    public function setUserToken(string $userToken): self
     {
         $this->userToken = $userToken;
 
         return $this;
     }
 
-    public function getUserTokenTime(): ?string
+    public function getUserTokenTime(): ?\DateTimeInterface
     {
         return $this->userTokenTime;
     }
 
-    public function setUserTokenTime(string $userTokenTime): self
+    public function setUserTokenTime(\DateTimeInterface $userTokenTime): self
     {
         $this->userTokenTime = $userTokenTime;
 
@@ -176,7 +154,7 @@ class Users
         return $this->userFirstName;
     }
 
-    public function setUserFirstName(?string $userFirstName): self
+    public function setUserFirstName(string $userFirstName): self
     {
         $this->userFirstName = $userFirstName;
 
@@ -188,7 +166,7 @@ class Users
         return $this->userLastName;
     }
 
-    public function setUserLastName(?string $userLastName): self
+    public function setUserLastName(string $userLastName): self
     {
         $this->userLastName = $userLastName;
 
@@ -200,43 +178,43 @@ class Users
         return $this->userGender;
     }
 
-    public function setUserGender(?int $userGender): self
+    public function setUserGender(int $userGender): self
     {
         $this->userGender = $userGender;
 
         return $this;
     }
 
-    public function getUserBirthdate(): ?\DateTimeInterface
+    public function getUserBirthday(): ?\DateTimeInterface
     {
-        return $this->userBirthdate;
+        return $this->userBirthday;
     }
 
-    public function setUserBirthdate(?\DateTimeInterface $userBirthdate): self
+    public function setUserBirthday(\DateTimeInterface $userBirthday): self
     {
-        $this->userBirthdate = $userBirthdate;
+        $this->userBirthday = $userBirthday;
 
         return $this;
     }
 
-    public function getUserHasAcceptedTerms(): ?int
+    public function getUserHasAcceptedTerms(): ?bool
     {
         return $this->userHasAcceptedTerms;
     }
 
-    public function setUserHasAcceptedTerms(?int $userHasAcceptedTerms): self
+    public function setUserHasAcceptedTerms(bool $userHasAcceptedTerms): self
     {
         $this->userHasAcceptedTerms = $userHasAcceptedTerms;
 
         return $this;
     }
 
-    public function getUserHasConfirmedEmail(): ?int
+    public function getUserHasConfirmedEmail(): ?bool
     {
         return $this->userHasConfirmedEmail;
     }
 
-    public function setUserHasConfirmedEmail(?int $userHasConfirmedEmail): self
+    public function setUserHasConfirmedEmail(bool $userHasConfirmedEmail): self
     {
         $this->userHasConfirmedEmail = $userHasConfirmedEmail;
 
@@ -248,7 +226,7 @@ class Users
         return $this->userCreationDate;
     }
 
-    public function setUserCreationDate(?\DateTimeInterface $userCreationDate): self
+    public function setUserCreationDate(\DateTimeInterface $userCreationDate): self
     {
         $this->userCreationDate = $userCreationDate;
 
@@ -260,7 +238,7 @@ class Users
         return $this->userAdress;
     }
 
-    public function setUserAdress(?string $userAdress): self
+    public function setUserAdress(string $userAdress): self
     {
         $this->userAdress = $userAdress;
 
@@ -284,7 +262,7 @@ class Users
         return $this->zipCode;
     }
 
-    public function setZipCode(?int $zipCode): self
+    public function setZipCode(int $zipCode): self
     {
         $this->zipCode = $zipCode;
 
@@ -296,33 +274,21 @@ class Users
         return $this->userCity;
     }
 
-    public function setUserCity(?string $userCity): self
+    public function setUserCity(string $userCity): self
     {
         $this->userCity = $userCity;
 
         return $this;
     }
 
-    public function getUserSpeciality(): ?int
+    public function getUserSpeciality(): ?string
     {
         return $this->userSpeciality;
     }
 
-    public function setUserSpeciality(?int $userSpeciality): self
+    public function setUserSpeciality(string $userSpeciality): self
     {
         $this->userSpeciality = $userSpeciality;
-
-        return $this;
-    }
-
-    public function getRoleId(): ?int
-    {
-        return $this->roleId;
-    }
-
-    public function setRoleId(int $roleId): self
-    {
-        $this->roleId = $roleId;
 
         return $this;
     }

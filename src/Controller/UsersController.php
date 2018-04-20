@@ -30,11 +30,13 @@ class UsersController extends Controller
     /** @TODO changer la façon dont est charger le controller (passé du GET -> session)
      * Matches /user/profile/*
      * @param $idUser object
+     * @param $request
      * @Route("/user/profile/{idUser}", name="profile")
      * @return object view
      */
-    public function ProfileManagement($idUser)
+    public function ProfileManagement(Request $request, $idUser)
     {
+        /** @var User $user */
         $user = $this->getDoctrine()
             ->getRepository(User::class)
             ->find($idUser);
@@ -47,16 +49,24 @@ class UsersController extends Controller
 
         $form = $this->createFormBuilder($user)
             ->add('userMail', EmailType::class)
-            ->add('userPassword', PasswordType::class)
             ->add('userFirstName', TextType::class)
             ->add('userLastName', TextType::class)
-            ->add('userGender', ChoiceType::class)
             ->add('userAdress', TextType::class)
-            ->add('userAvatar', FileType::class)
-            ->add('zipCode', IntegerType::class)
+            ->add('userAvatar', FileType::class, array('label' => "Avatar", 'required' => false))
+            ->add('zipCode', TextType::class)
             ->add('userCity', TextType::class)
             ->add('save', SubmitType::class, array('label' => 'Enregistrer mes changements'))
             ->getForm();
+
+        $form -> handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+           $user = $form->getData();
+           $userRequest = $this -> getDoctrine() -> getManager();
+           $userRequest -> persist($user);
+           $userRequest -> flush();
+        }
 
         return $this->render('users/profile_management.html.twig', array(
             'form' => $form->createView(),

@@ -27,6 +27,7 @@ class DefaultController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
             $data = $form->getData();
             /** @var $user User */
             $user = $this->getDoctrine()

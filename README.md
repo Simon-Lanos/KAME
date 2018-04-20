@@ -38,3 +38,8 @@ Pour ajouter du JS perso vous devez faire vos lien dans le block javascripts :
 
 {% endblock %}
 ```
+
+### Les mail de reset password
+
+Si le lien dans le mail ne fonctionne pas, 
+regardez si votre serveur intégré tourne bien sur le port 8000.

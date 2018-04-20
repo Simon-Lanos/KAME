@@ -257,12 +257,12 @@ class User
         return $this;
     }
 
-    public function getZipCode(): ?int
+    public function getZipCode()
     {
         return $this->zipCode;
     }
 
-    public function setZipCode(int $zipCode): self
+    public function setZipCode($zipCode): self
     {
         $this->zipCode = $zipCode;
 

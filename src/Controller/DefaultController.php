@@ -98,7 +98,7 @@ class DefaultController extends Controller
                         <body>
                         <p>Bonjour</p>' . $user->getUserFirstName() . ' ' . strtoupper($user->getUserLastName()) . ' ' . $user->getUserToken() . '
                         <p>Pour confirmer la réinitialisation de mot de passe, veuiller cliquer sur le boutton si dessous</p>
-                        <a href="http://127.0.0.1:8002/change/' . $user->getUserToken() . '">
+                        <a href="http://127.0.0.1:8000/change/' . $user->getUserToken() . '">
                             <img src="https://image.noelshack.com/fichiers/2018/15/5/1523612366-buttonvalidation.png" />
                         </a>
                         </body>
@@ -147,6 +147,7 @@ class DefaultController extends Controller
 
             if ($data["userPassword"] != $data["userPasswordConfirm"]) {
                 return $this->render('default/change.html.twig', array(
+                    'form' => $form->createView(),
                     'message' => " Erreur: Vos mots de passe sont différents"
                 ));
             }
@@ -156,14 +157,11 @@ class DefaultController extends Controller
             $em->persist($user);
             $em->flush();
 
-            return $this->render('default/index.html.twig', array(
-                'form' => $form->createView()
-            ));
+            return $this->redirectToRoute('default');
         }
         
         return $this->render('default/change.html.twig', array(
             'form' => $form->createView(),
-            'message' => "Votre mot de passe a bien été modifié"
         ));
     }
 }

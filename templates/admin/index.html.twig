@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ controller_name }}{% endblock %}
+
+{% block body %}
+<h1>Les views</h1>
+<ul>
+    <li><a href="{{asset('/admin/addEquipment')}}">Add equipment</a></li>
+    <li><a href="{{asset('/admin/updateEquipment')}}">Update equipment</a></li>
+    <li><a href="{{asset('/admin/addStudent')}}">Add student</a></li>
+    <li><a href="{{asset('/admin/updateStudent')}}">Update student</a></li>
+    <li><a href="{{asset('/admin/addTeacher')}}">Add teacher</a></li>
+    <li><a href="{{asset('/admin/updateTeacher')}}">Update Teacher</a></li>
+    <li><a href="{{asset('/admin/addGroup')}}">Add group</a></li>
+    <li><a href="{{asset('/admin/updateGroup')}}">Update group</a></li>
+    <li><a href="{{asset('/admin/addProms')}}">Add proms</a></li>
+    <li><a href="{{asset('/admin/updateProms')}}">Update Proms</a></li>
+</ul>
+{% endblock %}

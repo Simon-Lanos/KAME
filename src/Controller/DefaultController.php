@@ -36,7 +36,7 @@ class DefaultController extends Controller
 
             if ($data['userPassword'] == $user->getUserPassword())
             {
-                $session -> set('user',$user);
+                $session -> set('userClass',$user);
                 return $this-> redirectToRoute('default');
             }
         }
